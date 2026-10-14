@@ -6,6 +6,7 @@ import AppointmentForm from "./components/AppointmentForm";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
 import AppointmentCta from "./components/AppointmentCta";
+import DentalChatbot from "./components/DentalChatbot";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Contact />
       </main>
       <Footer />
+      <DentalChatbot />
     </div>
   );
 }

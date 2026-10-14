@@ -40,7 +40,16 @@ Put the deployed Apps Script `/exec` URL in `.env.local`. The current frontend a
 
 Call the SMS gateway only inside Apps Script after `SpreadsheetApp.flush()`. Store the gateway URL, API key, sender ID, and dentist number in Apps Script **Script Properties** and read them with `PropertiesService.getScriptProperties()`. Never put those credentials in React or in a `VITE_` environment variable, because Vite exposes those values to the browser.
 
-Before launch, replace the placeholder phone, address, and email in `src/pages/Contact.jsx` with the clinic's real details.
+## AI dental assistant
+
+The floating chat interface sends recent conversation messages to the existing Apps Script web app with `action: "chat"`. Apps Script applies emergency rules and calls the OpenAI Responses API, so the API key is never included in the React bundle.
+
+In **Apps Script → Project Settings → Script Properties**, add:
+
+- `OPENAI_API_KEY`: your OpenAI API key
+- `OPENAI_MODEL`: optional model override; defaults to `gpt-6-luna`
+
+Copy the latest `apps-script/Code.gs` into Apps Script and deploy a new version of the existing web-app deployment. Editing the existing deployment keeps the same `/exec` URL. The web app must execute as you so it can read Script Properties. Do not put the OpenAI key in `.env.local` or any variable beginning with `VITE_` because those values are exposed to browsers.
 
 ## Checks
 
